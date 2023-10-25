@@ -898,9 +898,13 @@ class Ecu_file:
                 if not os.path.exists(data):
                     print("Cannot load ECU file", data)
                     return
-            xdom = xml.dom.minidom.parse(data)
-            self.xmldoc = xdom.documentElement
-
+            # xdom = xml.dom.minidom.parse(data)
+            # self.xmldoc = xdom.documentElement
+                xdom = xml.dom.minidom.parse(data)
+                self.xmldoc = xdom.documentElement
+            else:
+                self.xmldoc = data
+                
             if not self.xmldoc:
                 print("XML not found")
                 return
@@ -1183,6 +1187,7 @@ class Ecu_database:
     jsonfile = "json/ecus.zip"
 
     def __init__(self, forceXML=False):
+    # def __init__(self, forceXML=True):
         global ecu_ident, protocol
         self.targets = []
         self.vehiclemap = {}
